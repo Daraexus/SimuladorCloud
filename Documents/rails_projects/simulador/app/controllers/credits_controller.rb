@@ -5,8 +5,7 @@ def new
 end
 
 def index
-
-
+  owner_user
   if params[:cedula]
     @cedula = params[:cedula]
     @credits = owner_user.credits.find( :all, :conditions => ["cedula = ?", params[:cedula] ] ).paginate(page: params[:page], per_page: 50)
@@ -20,7 +19,7 @@ def create
   	@credit = owner_user.credits.build(credit_params)
   	if @credit.save
   		flash[:success] = "Nuevo credito creado"
-  		redirect_to new_user_credit_path( params[:user_id] )
+  		redirect_to user_creditsr_path( params[:user_id] )
   	else
   		render 'new'
   	end

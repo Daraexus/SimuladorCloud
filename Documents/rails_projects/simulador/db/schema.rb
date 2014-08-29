@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140828224646) do
+ActiveRecord::Schema.define(version: 20140829011819) do
 
   create_table "credit_lines", force: true do |t|
     t.string   "name"
@@ -36,6 +36,19 @@ ActiveRecord::Schema.define(version: 20140828224646) do
   end
 
   add_index "credits", ["user_id", "lineaCredito"], name: "index_credits_on_user_id_and_lineaCredito"
+
+  create_table "fees", force: true do |t|
+    t.integer  "credit_id"
+    t.integer  "numero_cuota"
+    t.string   "pago_intereses"
+    t.string   "amortizacion"
+    t.string   "valor_cuota"
+    t.string   "saldo_pendiente"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "fees", ["credit_id"], name: "index_fees_on_credit_id"
 
   create_table "users", force: true do |t|
     t.string   "name"
