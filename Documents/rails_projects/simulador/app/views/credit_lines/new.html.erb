@@ -1,0 +1,21 @@
+<% provide(:title, 'Crear linea de credito') %>
+<h1>Creacion de nueva Linea de Credito</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%if >
+
+
+    <%= form_for(@credit_line) do |f| %>
+  	  <%= render 'shared/error_messages', object: f.object %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+
+      <%= f.label :annual_Rate %>
+      <%= f.text_field :annualRate %>
+
+      <%= f.submit "Crear linea de credito", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

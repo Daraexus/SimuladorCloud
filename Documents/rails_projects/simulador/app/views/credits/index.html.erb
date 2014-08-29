@@ -1,0 +1,52 @@
+<% provide(:title, 'Pagina de creditos con ' + @owner_user.pyme) %>
+
+<h1>Creditos con <%= @owner_user.pyme %></h1>
+
+<h2>Revise el estado de sus creditos</h2>
+
+
+<div class="row">
+  <div class="span6 offset3">
+ <%= form_tag(user_credits_path( params[:user_id]), method: "get") do |f| %>
+	 <%= label_tag(:cedula, "Cedula:") %>
+  	 <%= text_field_tag(:cedula) %>
+  	 <center>
+	<%= submit_tag "Revisar", class: "btn btn-large btn-primary" %>
+</center>
+<% end %>
+
+
+<%if @cedula.nil? || @cedula.empty?%>
+
+<%else %>
+<center>
+<table border=1>
+	  <tr>
+    <th style="text-align:center;">Cedula</th>
+    <th style="text-align:center;">Valor Credito</th>
+    <th style="text-align:center;">Plazo</th>
+    <th style="text-align:center;">Linea de Credito</th>
+    <th style="text-align:center;">Estado</th>
+    <th style="text-align:center;">Nivel de Riesgo</th>
+    <th style="text-align:center;">Fecha creacion</th>
+  </tr>
+	  <ol class="credit_lines">
+      <%= render @credits %>
+      </ol>
+      <%= will_paginate @credits %>
+  </table>
+</center>
+<%end%>
+
+<hr>
+
+<h2>Solicite un nuevo credito</h2>
+
+
+ <%= form_tag(new_user_credit_path( params[:user_id] ), method: "get") do |f| %>
+  	 <center>
+	<%= submit_tag "Nuevo Credito", class: "btn btn-large btn-primary" %>
+</center>
+<% end %>
+  </div>
+</div>

@@ -8,4 +8,44 @@
       </h1>
     </section>
   </aside>
+  <div class="span8">
+    <% if @user.credit_lines.any? %>
+      <h3>Lineas de Credito </h3>
+      <ol class="credit_lines">
+        <%= render @credit_lines %>
+      </ol>
+      <%= will_paginate @credit_lines %>
+    <% end %>
+      <%= link_to "Nueva linea de credito", createcreditline_path, class: "btn btn-large btn-primary" %>
+  </div>
+
+
+&nbsp;
+&nbsp;
+&nbsp;
+
+
+    <% if @user.credits.any? %>
+    <center>
+<table border=1>
+    <tr>
+    <th style="text-align:center;">Cedula</th>
+    <th style="text-align:center;">Valor Credito</th>
+    <th style="text-align:center;">Plazo</th>
+    <th style="text-align:center;">Linea de Credito</th>
+    <th style="text-align:center;">Estado</th>
+    <th style="text-align:center;">Nivel de Riesgo</th>
+    <th style="text-align:center;">Fecha creacion</th>
+  </tr>
+      <h3>Creditos solicitados por clientes (<%= @user.credits.count %>)</h3>
+      <ol class="credits">
+        <%= render @credits %>
+      </ol>
+      <%= will_paginate @credits %>
+        </table>
+    <% end %>
+
+
+</div>
+
 </div>

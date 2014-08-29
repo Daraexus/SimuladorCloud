@@ -11,7 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140823175628) do
+ActiveRecord::Schema.define(version: 20140828224646) do
+
+  create_table "credit_lines", force: true do |t|
+    t.string   "name"
+    t.float    "annualRate"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "credit_lines", ["user_id"], name: "index_credit_lines_on_user_id"
+
+  create_table "credits", force: true do |t|
+    t.string   "cedula"
+    t.string   "valorCredito"
+    t.integer  "plazo"
+    t.integer  "user_id"
+    t.integer  "lineaCredito"
+    t.string   "estado",       default: "En proceso"
+    t.string   "nivelRiesgo",  default: "En proceso"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "credits", ["user_id", "lineaCredito"], name: "index_credits_on_user_id_and_lineaCredito"
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -21,6 +45,7 @@ ActiveRecord::Schema.define(version: 20140823175628) do
     t.string   "password_digest"
     t.string   "remember_token"
     t.boolean  "admin",           default: false
+    t.string   "pyme"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

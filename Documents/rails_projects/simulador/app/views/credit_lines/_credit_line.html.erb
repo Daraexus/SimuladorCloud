@@ -1,0 +1,10 @@
+<li>
+  <span class="name"><%= credit_line.name %></span>
+  <span class="annual_rate"><%= credit_line.annualRate %> %
+  <% if current_user?(credit_line.user)%>
+   | <%= link_to "editar", edit_credit_line_path(credit_line.id) %>
+   | <%= link_to "borrar", credit_line, method: :delete,
+                                  data: { confirm: "Esta seguro?" } %>
+  <% end %>
+  </span>
+</li>

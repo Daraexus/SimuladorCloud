@@ -1,0 +1,25 @@
+<% provide(:title, 'Aplicacion a un nuevo credito ' + @owner_user.pyme) %>
+<h1>Aplicacion a un nuevo credito con <%= @owner_user.pyme %></h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for [@owner_user, @credit] do |f| %>
+  	  <%= render 'shared/error_messages', object: f.object %>
+
+      <%= f.label :cedula %>
+      <%= f.text_field :cedula %>
+
+      <%= f.label :valor_credito %>
+      <%= f.text_field :valorCredito %>
+
+      <%= f.label :plazo %>
+      <%= f.text_field :plazo %>
+
+      <%= f.label :linea_de_Credito %>
+      <%= f.collection_select :lineaCredito, @owner_user.credit_lines.all, :id, :name %>
+
+
+      <%= f.submit "Solicitar credito", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>
