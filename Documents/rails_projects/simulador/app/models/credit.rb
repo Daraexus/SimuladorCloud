@@ -15,17 +15,33 @@ class Credit < ActiveRecord::Base
 		#	end
 		#end"
 		#Thread.abort_on_exception=true
-		
+		credits = Credit.where(estado: "En proceso")
+
+
 		threads = []
-		Credit.where(estado: "En proceso").each do |credit| 		
-			procesarCredito(credit)
-			calcularRiesgo
-			credit.estado = ("Generado")
-			credit.nivelRiesgo = rand(10) + 1
-			credit.save
+
+		
+		credits.each do 
+			threads << Thread.new do
+				calcularRiesgo
+			end
+		end
+
+		threads.each do |t|
+			t.join
+		end
+
+			
+		credits.each do |credit| 		
+				procesarCredito(credit)
+				credit.estado = ("Generado")
+				credit.nivelRiesgo = rand(10) + 1
+				credit.save
+		
 
 		end
 
+	
 	end	
 
 			

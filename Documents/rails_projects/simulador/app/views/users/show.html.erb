@@ -8,7 +8,19 @@
       </h1>
     </section>
   </aside>
-  <div class="span8">
+  <div class="span10 offset3">
+      <center><p>La URL de <%=@user.pyme %> para solicitar creditos: <%=link_to user_credits_url(@user.id).to_s, user_credits_path(@user.id) %> </p></center>
+    </div>
+
+<center>
+  <div class="span8 offset3">
+
+
+
+&nbsp;
+&nbsp;
+&nbsp;
+
     <% if @user.credit_lines.any? %>
       <h3>Lineas de Credito </h3>
       <ol class="credit_lines">
@@ -18,7 +30,7 @@
     <% end %>
       <%= link_to "Nueva linea de credito", createcreditline_path, class: "btn btn-large btn-primary" %>
   </div>
-
+</center>
 
 &nbsp;
 &nbsp;

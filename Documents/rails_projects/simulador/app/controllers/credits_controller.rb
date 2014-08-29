@@ -1,7 +1,7 @@
 class CreditsController < ApplicationController
 
 def new
-    @credit = owner_user.credits.build 
+    @credit = owner_user.credits.build
 end
 
 def index
@@ -30,6 +30,11 @@ private
   def owner_user
   	@owner_user  = User.find( params[:user_id] )
   end
+
+  def credit_line
+    @credit_line = Credit_line.find( params[:credit_line_id])
+  end
+
 
 def credit_params
       params.require(:credit).permit(:cedula, :valorCredito, :plazo, :lineaCredito)

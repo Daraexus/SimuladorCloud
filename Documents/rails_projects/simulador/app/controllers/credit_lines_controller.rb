@@ -31,6 +31,11 @@ class CreditLinesController < ApplicationController
   end
 
   def destroy
+    @credits = current_user.credits.find( :all, :conditions => ["lineaCredito = ?", @credit_line.id])
+    @credits.each do |credit|
+      credit.destroy
+    end
+
     @credit_line.destroy
     flash[:success] = "Linea de credito eliminada con exito"
     redirect_to current_user
