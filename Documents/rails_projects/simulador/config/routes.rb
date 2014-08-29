@@ -1,6 +1,9 @@
 SampleApp::Application.routes.draw do
+  resources :fees, only: [:show]
   resources :users do 
-    resources :credits
+    resources :credits do
+      resources :fees
+    end
   end
   resources :sessions, only: [:new, :create, :destroy]
   resources :credit_lines

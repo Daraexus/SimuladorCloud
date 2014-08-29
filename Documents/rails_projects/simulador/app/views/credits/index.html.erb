@@ -16,7 +16,8 @@
 <% end %>
   </div>
 </div>
-<%if @cedula.nil? || @cedula.empty?%>
+
+<%if @cedula.nil? || @cedula.empty? || @credits.empty?%>
 
 <%else %>
 <center>
@@ -36,6 +37,7 @@
       <%= will_paginate @credits %>
   </table>
 </center>
+
 <%end%>
 
 <hr>

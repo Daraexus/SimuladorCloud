@@ -1,0 +1,23 @@
+<% provide(:title, 'Plan de pagos para ' + @credit.cedula) %>
+
+<h1>Plan de pagos para <%= @credit.cedula %></h1>
+<p>
+<b>Monto credito:</b> <%= @credit.valorCredito %> <p>
+<b>Plazos:</b> <%= @credit.plazo %><p>
+<b>Interes anual:</b> <%= @credit.user.credit_lines.find(@credit.lineaCredito).annualRate %> %<p>
+
+<center>
+<table border=1>
+	  <tr>
+    <th style="text-align:center;">N. Cuota</th>
+    <th style="text-align:center;">Pago Intereses</th>
+    <th style="text-align:center;">Amortizacion</th>
+    <th style="text-align:center;">Valor Cuota</th>
+    <th style="text-align:center;">Saldo Pendiente</th>
+  </tr>
+	  <ol class="fees">
+      <%= render @fees %>
+      </ol>
+      <%= will_paginate @credits %>
+  </table>
+</center>

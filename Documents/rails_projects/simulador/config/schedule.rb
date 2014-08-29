@@ -22,5 +22,5 @@
 set :output, { error: 'error.log', standard: 'cron.log' }
 
 every 1.minutes do
-	runner 'Credit.myMethod', environment => "development"
+	runner 'Credit.generarPlanes', environment => "development"
 end

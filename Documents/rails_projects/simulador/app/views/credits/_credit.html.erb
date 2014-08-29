@@ -3,7 +3,13 @@
   <td style="text-align:left;"><%= credit.valorCredito %></td>
   <td style="text-align:left;"><%= credit.plazo %></td>
   <td style="text-align:left;"><%= credit.user.credit_lines.find(credit.lineaCredito).name %></td>
-  <td style="text-align:left;"><%= credit.estado %></td>
+
+  <td style="text-align:left;">
+  	<%= credit.estado %> 
+  	<%if credit.estado == "Generado"%>
+  	<%= link_to "Ver detalles", user_credit_fees_path( params[:id] || params[:user_id], credit.id) %>
+  	<% end%>
+  </td>
   <td style="text-align:left;"><%= credit.nivelRiesgo %></td>
   <td style="text-align:left;"><%= credit.created_at %></td>
 
