@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20140829011819) do
     t.datetime "updated_at"
   end
 
-  add_index "credit_lines", ["user_id"], name: "index_credit_lines_on_user_id"
+  add_index "credit_lines", ["user_id"], name: "index_credit_lines_on_user_id", using: :btree
 
   create_table "credits", force: true do |t|
     t.string   "cedula"
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20140829011819) do
     t.datetime "updated_at"
   end
 
-  add_index "credits", ["user_id", "lineaCredito"], name: "index_credits_on_user_id_and_lineaCredito"
+  add_index "credits", ["user_id", "lineaCredito"], name: "index_credits_on_user_id_and_lineaCredito", using: :btree
 
   create_table "fees", force: true do |t|
     t.integer  "credit_id"
@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 20140829011819) do
     t.datetime "updated_at"
   end
 
-  add_index "fees", ["credit_id"], name: "index_fees_on_credit_id"
+  add_index "fees", ["credit_id"], name: "index_fees_on_credit_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 20140829011819) do
     t.string   "pyme"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["remember_token"], name: "index_users_on_remember_token"
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree
 
 end

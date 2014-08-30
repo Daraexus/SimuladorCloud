@@ -17,7 +17,7 @@ class Credit < ActiveRecord::Base
 		#Thread.abort_on_exception=true
 		credits = Credit.where(estado: "En proceso")
 
-
+		t1 = Time.now
 		threads = []
 
 		
@@ -31,6 +31,7 @@ class Credit < ActiveRecord::Base
 			t.join
 		end
 
+
 			
 		credits.each do |credit| 		
 				procesarCredito(credit)
@@ -40,7 +41,7 @@ class Credit < ActiveRecord::Base
 		
 
 		end
-
+		puts "Cron executed in #{Time.now - t1}"
 	
 	end	
 
