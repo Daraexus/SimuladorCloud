@@ -8,40 +8,41 @@ class Credit < ActiveRecord::Base
 	validates :lineaCredito, presence: true
 
 
-	def self.generarPlanes
-		#Credit.all.each do |n|
-		#	if n.cedula == "1019040272"
-		#		n.update_attribute(:estado, "Procesado")
-		#	end
-		#end"
-		#Thread.abort_on_exception=true
-		credits = Credit.where(estado: "En proceso")
-
-		t1 = Time.now
-		threads = []
+	def generarPlanes
+		
+		#credits = Credit.where(estado: "En proceso")
+#
+#		t1 = Time.now
+#		threads = []
+#
+#		
+#		credits.each do 
+#			threads << Thread.new do
+#				calcularRiesgo
+#			end
+#		end
+#
+#		threads.each do |t|
+#			t.join
+#		end
+#
+#
+#			
+#		credits.each do |credit| 		
+#				procesarCredito(credit)
+#				credit.estado = ("Generado")
+#				credit.nivelRiesgo = rand(10) + 1
+#				credit.save
+#		
+#
+##		puts "Cron executed in #{Time.now - t1}"
 
 		
-		credits.each do 
-			threads << Thread.new do
-				calcularRiesgo
-			end
-		end
-
-		threads.each do |t|
-			t.join
-		end
-
-
-			
-		credits.each do |credit| 		
-				procesarCredito(credit)
-				credit.estado = ("Generado")
-				credit.nivelRiesgo = rand(10) + 1
-				credit.save
-		
-
-		end
-		puts "Cron executed in #{Time.now - t1}"
+		calcularRiesgo
+		procesarCredito
+		self.estado = ("Generado")
+				self.nivelRiesgo = rand(10) + 1
+				self.save
 	
 	end	
 
@@ -49,7 +50,7 @@ class Credit < ActiveRecord::Base
 		
 		
 
-	def self.calcularRiesgo()
+	def calcularRiesgo()
 		timeStart = Time.now
 		timeEnd = timeStart
 
@@ -69,29 +70,28 @@ class Credit < ActiveRecord::Base
 
 		end
 
-
 	
 	end
 
 
-	def self.procesarCredito(credit)
+	def procesarCredito()
 
 		i = 0
 			fee = nil
 
-			monthRate = credit.user.credit_lines.find(credit.lineaCredito).annualRate / 1200
-			feeNumber = (credit.plazo).to_d
-			creditValue = (credit.valorCredito).to_d
+			monthRate = self.user.credit_lines.find(self.lineaCredito).annualRate / 1200
+			feeNumber = (self.plazo).to_d
+			creditValue = (self.valorCredito).to_d
 			saldoPendiente = creditValue
 			
 			feeAmount = (creditValue * monthRate * (1 + monthRate ) ** feeNumber) / 
 													(((1 + monthRate ) ** feeNumber)  - 1)
 	
 
-				until i >= credit.plazo do
+				until i >= self.plazo do
 			
 
-					fee = credit.fees.build
+					fee = self.fees.build
 
 							
 					fee.valor_cuota =	(feeAmount.round(2)).to_s		
