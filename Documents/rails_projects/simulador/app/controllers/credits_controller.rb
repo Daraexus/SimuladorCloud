@@ -21,7 +21,7 @@ def create
   	@credit = owner_user.credits.build(credit_params)
   	if @credit.save
   		flash[:success] = "Nuevo credito creado"
-      @credit.delay.generarPlanes
+      @credit.delay(:queue => 'default').generarPlanes
   		redirect_to user_credits_path( params[:user_id] )
   	else
   		render 'new'

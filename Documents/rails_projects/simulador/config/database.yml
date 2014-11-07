@@ -10,12 +10,12 @@
  # timeout: 10000
 
 development:
-  adapter: mysql2
+  adapter: mysql
   encoding: utf8
-  database: development
-  username: root
+  database: simuladorCredito
+  username: jpreyes
   password: cloud2014
-  host: localhost
+  host: simuladorcredito.cdua66i9fogs.us-west-2.rds.amazonaws.com
   port: 3306
 
 # Warning: The database defined as "test" will be erased and

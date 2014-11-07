@@ -6,6 +6,11 @@ SampleApp::Application.configure do
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
 
+  endpoint = "cache.myugct.cfg.usw2.cache.amazonaws.com:11211"
+  elasticache = Dalli::ElastiCache.new(endpoint)
+
+  config.cache_store = :dalli_store, elasticache.servers, {:expires_in => 1.day, :compress => true}
+
   # Do not eager load code on boot.
   config.eager_load = false
 
